@@ -30,6 +30,7 @@ namespace Stores
                     options.UseSqlServer(Configuration.GetConnectionString("ConexionSQL"))); services.AddControllersWithViews();
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Home/Login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
