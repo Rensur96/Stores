@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Stores.Models;
 using Stores.ViewModels;
@@ -13,13 +14,15 @@ namespace Stores.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _contex;
-    
-        public HomeController( AppDbContext context)
+        private readonly UserManager<IdentityUser> gestionUsuarios;
+        private readonly SignInManager<IdentityUser> gestionLogin;
+        public HomeController( AppDbContext context,UserManager<IdentityUser> gestionUsuarios,SignInManager<IdentityUser> gestionLogin)
         {
+            this.gestionUsuarios = gestionUsuarios;
+            this.gestionLogin = gestionLogin;
             _contex = context;
 
         }
-
         public IActionResult Index()
         {
             IEnumerable<Store> liststores = _contex.Store;
@@ -110,6 +113,76 @@ namespace Stores.Controllers
 
             TempData["mensaje"] = "Store '" + nombre + "' eliminada correctamente";
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Users()
+        {
+            
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Adduser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddUser(RegistroModelo user)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = new IdentityUser
+                {
+                    UserName = user.Email,
+                    Email = user.Email,
+                };
+                //Agrega usuario a la base de datos
+                var resultado = await gestionUsuarios.CreateAsync(usuario, user.Password);
+
+                if (resultado.Succeeded)
+                {
+                    TempData["mensaje"] = "Usuario '" + user.Email + "' agregado correctamente.";
+                    return RedirectToAction("AddUser");
+                }
+                foreach(var error in resultado.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await gestionLogin.SignOutAsync();
+            return RedirectToAction("login");
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await gestionLogin.PasswordSignInAsync(
+                    modelo.Email, modelo.Password, modelo.Recuerdame, false
+                    );
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index");
+                }
+                ModelState.AddModelError(string.Empty, "Credenciales invalidas.");
+            }
+            return RedirectToAction("Login", "Home");
         }
         public IActionResult Error()
         {

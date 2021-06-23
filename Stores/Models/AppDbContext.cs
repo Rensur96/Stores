@@ -16,17 +16,21 @@ namespace Stores.Models
         }
         public DbSet<Store> Store { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.Entity<Store>().HasData(new Store
-            {
-                Id = 1,
-                Nombre = "DefaultStore",
-                Direccion = "San Miguel",
-                Lat = 1.222222,
-                Long = 2.3333,
-                Telefono = "24578984"
-            });
+            base.OnModelCreating(builder);  
         }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Store>().HasData(new Store
+        //    {
+        //        Id = 1,
+        //        Nombre = "DefaultStore",
+        //        Direccion = "San Miguel",
+        //        Lat = 1.222222,
+        //        Long = 2.3333,
+        //        Telefono = "24578984"
+        //    });
+        //}
     }
 }
