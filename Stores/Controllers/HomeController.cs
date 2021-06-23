@@ -16,9 +16,9 @@ namespace Stores.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _contex;
-        private readonly UserManager<IdentityUser> gestionUsuarios;
-        private readonly SignInManager<IdentityUser> gestionLogin;
-        public HomeController( AppDbContext context,UserManager<IdentityUser> gestionUsuarios,SignInManager<IdentityUser> gestionLogin)
+        private readonly UserManager<UsuarioApliacion> gestionUsuarios;
+        private readonly SignInManager<UsuarioApliacion> gestionLogin;
+        public HomeController( AppDbContext context,UserManager<UsuarioApliacion> gestionUsuarios,SignInManager<UsuarioApliacion> gestionLogin)
         {
             this.gestionUsuarios = gestionUsuarios;
             this.gestionLogin = gestionLogin;
@@ -135,7 +135,7 @@ namespace Stores.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = new IdentityUser
+                var usuario = new UsuarioApliacion
                 {
                     UserName = user.Email,
                     Email = user.Email,

@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html>
-@inject SignInManager<IdentityUser> SignInManager
+@inject SignInManager<UsuarioApliacion> SignInManager
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Stores</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -62,12 +63,13 @@
             &copy; 2021 - Stores - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/js/site.js"></script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB63lA8cSBb2ZMqKG5n77FpR9yTBXSUg4c&callback=initMap&libraries=&v=weekly"
             async></script>
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

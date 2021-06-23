@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Stores.ViewModels;
+
 namespace Stores
 {
     public class Startup
@@ -29,7 +31,7 @@ namespace Stores
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ConexionSQL"))); services.AddControllersWithViews();
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<UsuarioApliacion, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Home/Login");
         }
 
