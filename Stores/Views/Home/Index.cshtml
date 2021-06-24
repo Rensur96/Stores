@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Store>
+@inject SignInManager<UsuarioApliacion> SignInManager
 @{
     ViewData["Title"] = "Stores";
 }
@@ -16,7 +17,10 @@
         <h3>@ViewData["Title"]</h3>
     </div>
     <div class="col-sm-6">
-        <a class="btn btn-info d-block" asp-action="AddStore" asp-controller="Home">Add Store</a>
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("administrador"))
+        {
+            <a class="btn btn-info d-block" asp-action="AddStore" asp-controller="Home">Add Store</a>
+        }
     </div>
 </div>
 <div class="row">
@@ -43,11 +47,14 @@
                         <td>@item.Lat</td>
                         <td>@item.Long</td>
                         <td>
-                            <a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
-                            <a asp-controller="Home" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                View Map
-                            </button>
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("administrador"))
+                            {
+                                <a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                                <a asp-controller="Home" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                    View Map
+                                </button>
+                            }
                         </td>
                     </tr>
 
@@ -73,7 +80,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

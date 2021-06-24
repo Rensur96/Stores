@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<RegistroModelo>*@
+﻿@model IEnumerable<RegistroModelo>
 @{
     ViewData["Title"] = "Users";
 }
@@ -26,9 +26,8 @@
         <table class="table table-bordered" table-striped>
             <thead>
                 <tr>
-                    <td>Html.DisplayNameFor(m => m.Id)</td>
-                    <td>Html.DisplayNameFor(m => m.FirstName)</td>
-                    <td>Html.DisplayNameFor(m => m.LastName)</td>
+                    <td>@Html.DisplayNameFor(m => m.FirstName)</td>
+                    <td>@Html.DisplayNameFor(m => m.LastName)</td>
                     <td>Html.DisplayNameFor(m => m.Email)</td>
                     <td>Html.DisplayNameFor(m => m.Role)</td>
                 </tr>

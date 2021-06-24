@@ -15,7 +15,7 @@ namespace Stores.Models
 
         }
         public DbSet<Store> Store { get; set; }
-
+         
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);  

@@ -393,3 +393,4 @@ C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\bin\Debug\net5.0\Microsof
 C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\Home\AddUser.cshtml.g.cs
 C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs
 C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\Home\Users.cshtml.g.cs
+C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\Home\AddRol.cshtml.g.cs
