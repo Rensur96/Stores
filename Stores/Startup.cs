@@ -62,7 +62,7 @@ namespace Stores
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Store}/{action=AddStore}/{id?}");
+                    pattern: "{controller=Store}/{action=Index}/{id?}");
             });
         }
     }
