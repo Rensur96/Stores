@@ -63,14 +63,14 @@ namespace Stores.Controllers
                     LasttName = user.LastName
                 };
 
-                string idrol = user.Rol;
+                string namerol = user.Rol;
                 //Agrega usuario a la base de datos
                 var resultado = await gestionUsuarios.CreateAsync(usuario, user.Password);
                 //Se le asigna el rol al usuario
-                var rolResutado = await gestionUsuarios.AddToRoleAsync(usuario, idrol);
+                var rolResutado = await gestionUsuarios.AddToRoleAsync(usuario, namerol);
                 if (resultado.Succeeded)
                 {
-                    TempData["mensaje"] = "Usuario '" + user.Email + "' agregado correctamente.";
+                    TempData["mensaje"] = "'" + user.Email + "'@" + namerol+" agregado correctamente.";
                     return RedirectToAction("Index");
                 }
                 foreach (var error in resultado.Errors)
