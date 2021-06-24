@@ -31,7 +31,8 @@ namespace Stores
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ConexionSQL"))); services.AddControllersWithViews();
 
-            services.AddIdentity<UsuarioApliacion, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<UsuarioApliacion, ApplicationRole>().AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(options => {
                 options.LoginPath = "/Cuenta/Index";
                 options.AccessDeniedPath = "/Cuenta/AccesoDenegado";
@@ -40,7 +41,11 @@ namespace Stores
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app,
+            IWebHostEnvironment env,
+            AppDbContext context,
+            RoleManager<ApplicationRole> roleManager,
+            UserManager<UsuarioApliacion> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -62,8 +67,9 @@ namespace Stores
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Store}/{action=Index}/{id?}");
+                    pattern: "{controller=Cuenta}/{action=Index}/{id?}");
             });
+            DummyData.Initialize(context,userManager,roleManager).Wait();
         }
     }
 }

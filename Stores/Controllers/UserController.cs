@@ -17,9 +17,9 @@ namespace Stores.Controllers
     {
         private readonly AppDbContext _contex;
         private readonly UserManager<UsuarioApliacion> gestionUsuarios;
-        private readonly RoleManager<IdentityRole> gestionRoles;
+        private readonly RoleManager<ApplicationRole> gestionRoles;
 
-        public UserController(RoleManager<IdentityRole> gestionRoles , AppDbContext context, UserManager<UsuarioApliacion> gestionUsuarios)
+        public UserController(RoleManager<ApplicationRole> gestionRoles , AppDbContext context, UserManager<UsuarioApliacion> gestionUsuarios)
         {
             this.gestionUsuarios = gestionUsuarios;
             this.gestionRoles = gestionRoles;
@@ -104,7 +104,7 @@ namespace Stores.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityRole identityRole = new IdentityRole
+                ApplicationRole identityRole = new ApplicationRole
                 {
                     Name = model.NameRol
                 };

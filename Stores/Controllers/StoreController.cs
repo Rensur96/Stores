@@ -17,14 +17,8 @@ namespace Stores.Controllers
     public class StoreController : Controller
     {
         private readonly AppDbContext _contex;
-        private readonly UserManager<UsuarioApliacion> gestionUsuarios;
-        private readonly SignInManager<UsuarioApliacion> gestionLogin;
-        private readonly RoleManager<IdentityRole> gestionRoles;
-        public StoreController(RoleManager<IdentityRole> gestionRoles ,AppDbContext context,UserManager<UsuarioApliacion> gestionUsuarios,SignInManager<UsuarioApliacion> gestionLogin)
+        public StoreController(AppDbContext context)
         {
-            this.gestionRoles = gestionRoles; 
-            this.gestionUsuarios = gestionUsuarios;
-            this.gestionLogin = gestionLogin;
             _contex = context;
 
         }

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace Stores.Models
 {
-    public class AppDbContext: IdentityDbContext<UsuarioApliacion>
+    public class AppDbContext: IdentityDbContext<UsuarioApliacion, ApplicationRole,string>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
         {

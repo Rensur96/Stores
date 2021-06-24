@@ -24,6 +24,10 @@ namespace Stores.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            if (gestionLogin.IsSignedIn(User))
+            {
+                return RedirectToAction("index", "Store");
+            }
             return View();
         }
 
