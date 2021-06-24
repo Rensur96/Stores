@@ -390,7 +390,6 @@ C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Vi
 C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\Store\Delete.cshtml.g.cs
 C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\Store\Details.cshtml.g.cs
 C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\Store\Index.cshtml.g.cs
-C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\User\AddRol.cshtml.g.cs
 C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\User\AddUser.cshtml.g.cs
 C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\User\Index.cshtml.g.cs
 C:\Users\Alex\Desktop\proyectos\Net Core\Stores\Stores\obj\Debug\net5.0\Razor\Views\Cuenta\Index.cshtml.g.cs

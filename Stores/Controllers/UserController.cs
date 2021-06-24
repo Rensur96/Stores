@@ -88,39 +88,5 @@ namespace Stores.Controllers
             model.Rol = "normal";
             return View(model);
         }
-
-
-        //Creacion de roles//
-        [HttpGet]
-        public IActionResult AddRol()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddRol(CrearRolViewModels model)
-        {
-            if (ModelState.IsValid)
-            {
-                ApplicationRole identityRole = new ApplicationRole
-                {
-                    Name = model.NameRol
-                };
-                IdentityResult result = await gestionRoles.CreateAsync(identityRole);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("index", "User");
-                }
-                foreach (IdentityError error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-            }
-            return View(model);
-        }
-
-
     }
 }
