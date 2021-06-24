@@ -48,20 +48,20 @@
                             <td>@item.Nombre</td>
                             <td>@item.Direccion</td>
                             <td>@item.Telefono</td>
-                            <td>@item.Lat</td>
-                            <td>@item.Long</td>
+                            <td class="td-lat">@item.Lat</td>
+                            <td class="td-long">@item.Long</td>
                             <td>
-                                <div class="row">
+                               
                                     @if (SignInManager.IsSignedIn(User) && User.IsInRole("administrador"))
                                     {
-                                        <a asp-controller="Store" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success col-sm-4 col-s-3 col-m-3">Edit</a>
-                                        <a asp-controller="Store" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger col-sm-4 col-s-3 col-m-3">Delete</a>
+                                        <a asp-controller="Store" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success ">Edit</a>
+                                        <a asp-controller="Store" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger ">Delete</a>
 
                                     }
-                                    <button type="button" class="btn btn-primary col-sm-4 col-s-3 col-m-3" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <button type="button" class="btn btn-primary  btn-viewmap" data-toggle="modal" data-target="#exampleModalCenter">
                                         View Map
                                     </button>
-                                </div>
+                            
                             </td>
                         </tr>
 
@@ -86,8 +86,7 @@
         }
     </div>
 </div>
-<div id="map"></div>
-<!-- Modal -->
+<!-- Modal View map -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -98,12 +97,55 @@
                 </button>
             </div>
             <div class="modal-body">
-
+                <div class="col-sm-12">
+                    <div id="map" style="height:400px;width:100%;"></div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    let storeLat ="";
+    let storeLong = "";
+    let mapa;
+    let marker;
+    var myLatLng = { lat: 13.794185, lng: -88.89653 };
+    $(document).ready(function () {
+        $(".btn-viewmap").click(function () {
+            // Obtenemos todos los valores contenidos en los <td> de la fila
+            // seleccionada
+            $(this).parents("tr").find(".td-lat").each(function () {
+                storeLat = Number($(this).html() );
+            });
+            $(this).parents("tr").find(".td-long").each(function () {
+                storeLong = Number($(this).html());
+            });
+
+            myLatLng = { lat: Number(storeLat), lng: Number(storeLong) };
+            console.log(myLatLng);
+            marker.setPosition(myLatLng);
+        });
+    });
+    function initMap() {
+        //Ubicacion por defecto
+        console.log(myLatLng);
+        mapa = new google.maps.Map(document.getElementById("map"), {
+            zoom: 8,
+            center: myLatLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        marker = new google.maps.Marker({
+            position: myLatLng,
+            map: mapa,
+            draggable: true,
+        });
+        // centrar mapa en coordenadas
+        mapa.setCenter(marker.position);
+
+        //agregar marker al mapa
+        marker.setMap(mapa);
+    }
+</script>

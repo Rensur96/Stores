@@ -26,10 +26,12 @@ namespace Stores.ViewModels
         public string Telefono { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public double Lat { get; set; }
+        [Display(Name = "Latitud")]
+        public string Lat { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public double Long { get; set; }
+        [Display(Name = "Longitud")]
+        public string Long { get; set; }
         public string pathImage { get; set; }
     }
 }

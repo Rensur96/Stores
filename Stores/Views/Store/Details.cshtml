@@ -33,12 +33,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Lat" class="control-label"></label>
-                <input asp-for="Lat" class="form-control" />
+                <input asp-for="Lat" class="form-control" readonly/>
                 <span asp-validation-for="Lat" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Long" class="control-label"></label>
-                <input asp-for="Long" class="form-control" />
+                <input asp-for="Long" class="form-control" readonly />
                 <span asp-validation-for="Lat" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,6 +47,42 @@
         </form>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div id="map" style="height:400px"></div>
+    </div>
+</div>
+<script>
+    //Variables globales
+    let mapa;
+    let marker;
+    let watchID;
+    let geoLoc;
+
+    function initMap() {
+        const myLatLng = { lat: Number($("#Lat").val()), lng: Number($("#Long").val()) };
+        mapa = new google.maps.Map(document.getElementById("map"), {
+            zoom: 9.5,
+            center: myLatLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        marker = new google.maps.Marker({
+            position: myLatLng,
+            map: mapa,
+            draggable: true,
+        });
+        google.maps.event.addListener(marker, 'dragend', function (evt) {
+            $("#Lat").val(evt.latLng.lat());
+            $("#Long").val(evt.latLng.lng());
+            mapa.panTo(evt.latLng);
+        });
+        // centers the map on markers coords
+        mapa.setCenter(marker.position);
+
+        // adds the marker on the map
+        marker.setMap(mapa);
+    }
+</script>
 @section Scripts{
     @{
         <partial name="_ValidationScriptsPartial" />
