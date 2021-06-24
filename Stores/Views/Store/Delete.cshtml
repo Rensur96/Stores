@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-sm-10">
-            <form asp-action="DeleteStore"  method="post">
+            <form asp-controller="Store" asp-action="DeleteStore"  method="post">
                 <input type="hidden" asp-for="Id" />
                 <div asp-validation-summary="ModelOnly" class="text-danger">
 

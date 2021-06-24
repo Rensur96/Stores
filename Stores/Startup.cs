@@ -32,7 +32,11 @@ namespace Stores
                     options.UseSqlServer(Configuration.GetConnectionString("ConexionSQL"))); services.AddControllersWithViews();
 
             services.AddIdentity<UsuarioApliacion, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
-            services.ConfigureApplicationCookie(options => options.LoginPath = "/Home/Login");
+            services.ConfigureApplicationCookie(options => {
+                options.LoginPath = "/Cuenta/Index";
+                options.AccessDeniedPath = "/Cuenta/AccesoDenegado";
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +48,7 @@ namespace Stores
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Store/Error");
             }
             app.UseStaticFiles();
 
@@ -58,7 +62,7 @@ namespace Stores
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Store}/{action=Index}/{id?}");
             });
         }
     }
